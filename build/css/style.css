@@ -8,3 +8,30 @@
 /*.btn-group-lg>.btn, .btn-lg, .btn {
   font-size: 30px;
 }*/
+
+#content {
+    font-family: 'Roboto', sans-serif;
+}
+
+.tile, .button {
+    height: 100px;
+    width: 100px;
+}
+
+#board {
+    width : 300px;
+    height: 300px;
+    margin: auto;
+    position: relative;
+}
+
+.row {
+    height: 100px;
+    margin: 0px;
+}
+
+.test {
+    position: absolute;
+    padding: 0;
+    top: 30%;
+}

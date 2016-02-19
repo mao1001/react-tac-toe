@@ -8,9 +8,7 @@ var exports = module.exports = {};
 
 exports.Board = React.createClass ({
     render : function() {
-
         var boardData = this.props.gameData.boardData;
-        var controller = this.props.controller;
 
         var style = {
             height: 100,
@@ -83,6 +81,7 @@ exports.GameInfo = React.createClass ({
 exports.Message = React.createClass ({
 
     render : function() {
+        //console.log("About to send this message: " + this.props.gameData.message);
         return  <Snackbar
                   open={true}
                   message={this.props.gameData.message}

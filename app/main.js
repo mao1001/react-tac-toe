@@ -16,7 +16,6 @@ var game = require('./game.js');
 var controller = {
 
     handleClick : function(id) {
-        console.log("Clicked: " + id);
         game.move(id);
 
         this.updateBoard();
@@ -48,11 +47,14 @@ var controller = {
     resetScores : function() {
         game.resetScores();
         this.updateGameInfo();
+        this.updateMessage(game.gameData.message);
+
     },
 
     resetBoard : function() {
         game.resetBoard();
         this.updateBoard();
+        this.updateMessage(game.gameData.message);
     }
 }
 

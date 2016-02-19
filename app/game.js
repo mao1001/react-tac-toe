@@ -5,6 +5,7 @@ var gameData = {
 	playerScores : [],
 	boardData : [],
 	player1 : true,
+	movesLeft : 0,
 	message : "Welcome! Player 1, you are X's!"
 }
 exports.gameData = gameData;
@@ -101,18 +102,21 @@ function checkDiagonals() {
 	return false;
 }
 
-function endGame() {
+function endGame(tie) {
 	//console.log("game ended");
-	if (gameData.player1) {
+	if (tie) {
+		gameData.message = "It's a tie! Reset to settle the score!";
+	} else if (gameData.player1) {
 		gameData.playerScores[0] = gameData.playerScores[0] + 1;
-		gameData.message = "Player 1 won!" 
+		gameData.message = "Player 1 won! Reset for a rematch!";
 	} else {
 		gameData.playerScores[1] = gameData.playerScores[1] + 1;
-		gameData.message = "Player 2 won!" 
+		gameData.message = "Player 2 won! Reset for a rematch!"; 
 	}
 
 	fillRestOfBoard("-");
 }
+
 
 var resetScores = function resetScores() {
 	gameData.playerScores = [0,0];
@@ -135,11 +139,16 @@ exports.move = (function(index) {
 		gameData.message = "Player 1 (X's)! You are up!"
 	}
 
+
 	var row = findRow(index);
 	var col = findCol(index);
 
+	gameData.movesLeft = gameData.movesLeft - 1;
+
 	if (checkRow(row) || checkColumn(col) || checkDiagonals()) {
-		endGame();
+		endGame(false);
+	} else if (gameData.movesLeft == 0) {
+		endGame(true);
 	}
 
 	gameData.player1 = !gameData.player1;
@@ -147,5 +156,13 @@ exports.move = (function(index) {
 
 
 exports.resetBoard = ( function() {
+	if (!gameData.player1) {
+		gameData.message = "Player 2 (O's)! You are up!"
+	} else {
+		gameData.message = "Player 1 (X's)! You are up!"
+	}
+
+	gameData.movesLeft = 9;
+
 	newBoard();
 });

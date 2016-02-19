@@ -9,33 +9,32 @@ injectTapEventPlugin();
 
 var React = require('react');
 var ReactDOM = require('react-dom');
-var FlatButton = require('material-ui/lib/flat-button');
+var components = require('./components.js');
+var game = require('./game.js');
 
-var Board = React.createClass ({
-    render : function() {
-        return  <div id="board">
-                    <FlatButton className = 'tile' label="X" />
-                    <FlatButton className = 'tile' label="O" />
-                    <FlatButton className = 'tile' label="X" />
-                    <FlatButton className = 'tile' label="X" />
-                    <FlatButton className = 'tile' label="O" />
-                    <FlatButton className = 'tile' label="X" />
-                    <FlatButton className = 'tile' label="X" />
-                    <FlatButton className = 'tile' label="O" />
-                    <FlatButton className = 'tile' label="X" />
-                </div>;
-    } 
-});
 
-ReactDOM.render(<Board />, document.getElementById('content'));
+var controller = {
 
-(function setStyle() {
-    var tiles = document.getElementsByClassName("tile");
-    
-    for (var i = 0; i < tiles.length; i++) {
-        var divs = tiles[i].firstChild.classList.add('button');
-        var children = tiles[i].getElementsByTagName('span');
-        children[0].classList.add("test");
-        console.log(children);
+    handleClick : function(id) {
+        console.log("Clicked: " + id);
+    },
+
+    startGame : function() {
+        game.start();
+        ReactDOM.render(<components.Board labels={game.boardData} controller={this}/>, document.getElementById('content'));
+    },
+
+    setStyle : function() {
+        var tiles = document.getElementsByClassName("tile");
+        
+        for (var i = 0; i < tiles.length; i++) {
+            var button = tiles[i].firstChild
+            button.classList.add('button');
+            var children = tiles[i].getElementsByTagName('span');
+            children[0].classList.add("label");
+        }
     }
-})();
+}
+
+controller.startGame();
+controller.setStyle();

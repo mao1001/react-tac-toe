@@ -18,13 +18,16 @@ var controller = {
     handleClick : function(id) {
         console.log("Clicked: " + id);
         game.move(id);
-        this.update();
+        this.updateBoard();
     },
 
     startGame : function() {
         game.start();
 
-        this.update();
+        this.updateGameInfo();
+        this.updateBoard();
+
+        console.log(game.gameData.playerScores);
     },
 
     setStyle : function() {
@@ -38,8 +41,17 @@ var controller = {
         }
     },
 
-    update : function() {
-        ReactDOM.render(<components.Board labels={game.boardData} controller={this}/>, document.getElementById('content'));
+    updateBoard : function() {
+        ReactDOM.render(<components.Board gameData={game.gameData} controller={this}/>, document.getElementById('div2'));
+    },
+
+    updateGameInfo : function() {
+        ReactDOM.render(<components.GameInfo gameData={game.gameData} controller={this} />, document.getElementById('div1'));
+    },
+
+    resetScores : function() {
+        game.resetScores();
+        this.updateGameInfo();
     }
 }
 

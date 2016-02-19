@@ -1,25 +1,33 @@
 var exports = module.exports = {};
 
 
-var player1 = true;
-var boardData = []
-exports.boardData = boardData;
+var gameData = {
+	playerScores : [],
+	boardData : [],
+	player1 : true
+}
+exports.gameData = gameData;
 
 
 exports.start = (function () {
 
 	for (var i = 0; i < 9; i++) {
-		boardData[i] = i;
+		gameData.boardData[i] = " ";
 	}
 
+	gameData.playerScores = [3,3];
 });
 
 exports.move = (function(index) {
-	if (player1) {
-		boardData[index] = "X";
+	if (gameData.player1) {
+		gameData.boardData[index] = "X";
 	} else {
-		boardData[index] = "O";
+		gameData.boardData[index] = "O";
 	}
 
-	player1 = !player1;
+	gameData.player1 = !gameData.player1;
+});
+
+exports.resetScores = ( function() {
+	gameData.playerScores = [0,0];
 });

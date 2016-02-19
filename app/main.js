@@ -17,11 +17,14 @@ var controller = {
 
     handleClick : function(id) {
         console.log("Clicked: " + id);
+        game.move(id);
+        this.update();
     },
 
     startGame : function() {
         game.start();
-        ReactDOM.render(<components.Board labels={game.boardData} controller={this}/>, document.getElementById('content'));
+
+        this.update();
     },
 
     setStyle : function() {
@@ -33,6 +36,10 @@ var controller = {
             var children = tiles[i].getElementsByTagName('span');
             children[0].classList.add("label");
         }
+    },
+
+    update : function() {
+        ReactDOM.render(<components.Board labels={game.boardData} controller={this}/>, document.getElementById('content'));
     }
 }
 

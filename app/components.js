@@ -13,7 +13,7 @@ exports.Board = React.createClass ({
         return  <div id="board">
                     {this.props.labels.map(function(item, i) {
                       return (
-                        <FlatButton id = {labels[i].toString()} label = {labels[i].toString()} 
+                        <FlatButton id = {i.toString()} label = {labels[i].toString()} 
                             className = 'tile' onClick={this.handleClick.bind(this, i)} key={i}/>
                       );
                     }, this)}

@@ -23,6 +23,7 @@
     height: 300px;
     margin: auto;
     position: relative;
+    background-color : LightGray;
 }
 
 .row {

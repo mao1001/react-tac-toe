@@ -13,11 +13,6 @@
     font-family: 'Roboto', sans-serif;
 }
 
-.tile, .button {
-    height: 100px;
-    width: 100px;
-}
-
 .gameInfo {
     width: 30%; /*can be in percentage also.*/
     text-align: center;

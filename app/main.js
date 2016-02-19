@@ -18,27 +18,19 @@ var controller = {
     handleClick : function(id) {
         console.log("Clicked: " + id);
         game.move(id);
+
         this.updateBoard();
+        this.updateGameInfo();
+
+        this.updateMessage(game.gameData.message);
     },
 
     startGame : function() {
         game.start();
-
-        this.updateGameInfo();
         this.updateBoard();
 
-        console.log(game.gameData.playerScores);
-    },
-
-    setStyle : function() {
-        var tiles = document.getElementsByClassName("tile");
-        
-        for (var i = 0; i < tiles.length; i++) {
-            var button = tiles[i].firstChild
-            button.classList.add('button');
-            var children = tiles[i].getElementsByTagName('span');
-            children[0].classList.add("label");
-        }
+        this.updateGameInfo();
+        this.updateMessage(game.gameData.message);
     },
 
     updateBoard : function() {
@@ -49,11 +41,19 @@ var controller = {
         ReactDOM.render(<components.GameInfo gameData={game.gameData} controller={this} />, document.getElementById('div1'));
     },
 
+    updateMessage : function() {
+        ReactDOM.render(<components.Message gameData={game.gameData} controller={this} />, document.getElementById('div3'));
+    },
+
     resetScores : function() {
         game.resetScores();
         this.updateGameInfo();
+    },
+
+    resetBoard : function() {
+        game.resetBoard();
+        this.updateBoard();
     }
 }
 
 controller.startGame();
-controller.setStyle();

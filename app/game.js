@@ -1,6 +1,6 @@
 var exports = module.exports = {};
 
-
+//Game data object that can be passed through to whoever needs the data.
 var gameData = {
 	playerScores : [],
 	boardData : [],
@@ -10,6 +10,14 @@ var gameData = {
 }
 exports.gameData = gameData;
 
+//Resets the players scores.
+var resetScores = function resetScores() {
+	gameData.playerScores = [0,0];
+}
+
+exports.resetScores = resetScores;
+
+//Fills the rest of the blank tiles with the indicated filler.
 function fillRestOfBoard(filler) {
 	for (var i = 0; i < 9; i++) {
 		if (gameData.boardData[i] === " ") {
@@ -18,12 +26,14 @@ function fillRestOfBoard(filler) {
 	}
 }
 
+//Wipes the board clean.
 function newBoard() {
 	for (var i = 0; i < 9; i++) {
 		gameData.boardData[i] = " ";
 	}
 }
 
+//Finds the row with the given index.
 function findRow(index) {
 	if (index < 3) {
 		return 1;
@@ -34,6 +44,7 @@ function findRow(index) {
 	}
 }
 
+//Finds the column with the given index.
 function findCol(index) {
 	if (index % 3 == 0) {
 		return 1;
@@ -44,6 +55,7 @@ function findCol(index) {
 	}
 }
 
+//Checks the column to see if it completed. Returns true if so.
 function checkColumn(colNumber) {
 	var firstValue = (colNumber - 1);
 	var secondValue = firstValue + 3;
@@ -62,6 +74,7 @@ function checkColumn(colNumber) {
 	return false;
 }
 
+//checks the row to see if it completed. Returns true if so.
 function checkRow(rowNumber) {
 	var firstValue = (rowNumber - 1) * 3;
 	var secondValue = firstValue + 1;
@@ -82,10 +95,7 @@ function checkRow(rowNumber) {
 	return false;
 }
 
-//[0, 1, 2, 
-// 3, 4, 5, 
-// 6, 7, 8]
-
+//Checks to see if either diagonals are completed.
 function checkDiagonals() {
 	var firstThing = gameData.boardData[0];
 	var secondThing = gameData.boardData[4];
@@ -102,6 +112,7 @@ function checkDiagonals() {
 	return false;
 }
 
+//Ends the game and disables the rest of the board.
 function endGame(tie) {
 	//console.log("game ended");
 	if (tie) {
@@ -117,19 +128,14 @@ function endGame(tie) {
 	fillRestOfBoard("-");
 }
 
-
-var resetScores = function resetScores() {
-	gameData.playerScores = [0,0];
-}
-
-exports.resetScores = resetScores;
-
-
+//Starts the game.
 exports.start = (function () {
 	newBoard();
 	resetScores();
 });
 
+//Makes a move on the board and places the appropriate marker. Will end the game if 
+//there are no more move to be made or someone has won.
 exports.move = (function(index) {
 	if (gameData.player1) {
 		gameData.boardData[index] = "X";
@@ -154,7 +160,7 @@ exports.move = (function(index) {
 	gameData.player1 = !gameData.player1;
 });
 
-
+//Resets the board.
 exports.resetBoard = ( function() {
 	if (!gameData.player1) {
 		gameData.message = "Player 2 (O's)! You are up!"

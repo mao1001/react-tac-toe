@@ -12,7 +12,7 @@ var ReactDOM = require('react-dom');
 var components = require('./components.js');
 var game = require('./game.js');
 
-
+//Handles the logic between the interface and the game logic.
 var controller = {
 
     handleClick : function(id) {

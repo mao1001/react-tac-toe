@@ -1,11 +1,18 @@
+/*
+This file contains all the react components used in the tic tac toe game.
+*/
+
+//All required files and classes.
 var React = require('react');
 var FlatButton = require('material-ui/lib/flat-button');
 var RaisedButton = require('material-ui/lib/raised-button');
 var Paper = require('material-ui/lib/paper');
 var Snackbar = require('material-ui/lib/snackbar');
 
+//Prepares the react classes for exporting.
 var exports = module.exports = {};
 
+//Creates the game board react class. Contains 9 tiles inside as well.
 exports.Board = React.createClass ({
     render : function() {
         var boardData = this.props.gameData.boardData;
@@ -50,6 +57,7 @@ exports.Board = React.createClass ({
     }
 });
 
+//Creates the game info react class. This contains the score board and the title of the game.
 exports.GameInfo = React.createClass ({
 
     render : function() {
@@ -78,6 +86,7 @@ exports.GameInfo = React.createClass ({
     }
 });
 
+//Creates a react class to which a message can be displayed to the user.
 exports.Message = React.createClass ({
 
     render : function() {

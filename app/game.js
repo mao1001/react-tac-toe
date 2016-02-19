@@ -12,7 +12,7 @@ exports.gameData = gameData;
 
 //Resets the players scores.
 var resetScores = function resetScores() {
-	gameData.playerScores = [0,0];
+	gameData.playerScores = [0,0,0];
 }
 
 exports.resetScores = resetScores;
@@ -116,6 +116,7 @@ function checkDiagonals() {
 function endGame(tie) {
 	//console.log("game ended");
 	if (tie) {
+		gameData.playerScores[2] = gameData.playerScores[2] + 1;
 		gameData.message = "It's a tie! Reset to settle the score!";
 	} else if (gameData.player1) {
 		gameData.playerScores[0] = gameData.playerScores[0] + 1;

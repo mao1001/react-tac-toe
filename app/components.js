@@ -71,6 +71,7 @@ exports.GameInfo = React.createClass ({
                         <p id='title'>Tic Tac Toe!</p>
                         <p>Player 1: {this.props.gameData.playerScores[0]}</p>
                         <p>Player 2: {this.props.gameData.playerScores[1]}</p>
+                        <p>Ties: {this.props.gameData.playerScores[2]}</p>
                         <RaisedButton style={style} onClick={this.resetScores} label="Reset Player Scores" secondary={true} />
                         <RaisedButton style={style} onClick={this.resetBoard} label="Reset Board" primary={true} />
 
